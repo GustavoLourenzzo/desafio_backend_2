@@ -1,0 +1,33 @@
+Rota utilizada para Deletar um usuario na base de dados
+
+---
+tags:
+  - users
+parameters:
+  - name: document
+    in: path
+    type: string
+    required: true
+
+definitions:
+  document:
+    type: string
+    exemple: "123456"
+
+produces:
+  - application/json
+
+responses:
+  200:
+    description: Registro deletado com sucesso.
+    exemples:
+      - application/json: {'result': "Registro deletado com sucesso."}
+  400:
+    description: Bad Request
+    exemples:
+      - application/json: {'result':{"error":{"msg": "400 error: Requisição inválida.","errors": ['Campo "document" invalido']}}}
+  403:
+    description: O registro solicitado não existe.
+  500:
+    description: Houve um problema inesperado com o servidor.
+    

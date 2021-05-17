@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: python_api_users
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    #image: python:latest
+    restart: always
+    ports:
+      - '80:5000'
+    volumes:
+      - ./:/usr/src/app
+    depends_on:
+      - mongo
+    links:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: banco_mongo2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: senha123
+      MONGO_INITDB_DATABASE: desafio_back
+    volumes:
+      - mongo-data:/data/db
+      - mongo-configdb:/data/configdb
+volumes:
+  mongo-data:
+  mongo-configdb:
+  

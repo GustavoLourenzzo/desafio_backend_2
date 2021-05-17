@@ -1,0 +1,31 @@
+Endpoint que retorna os dados de um usuario registrado no banco de dados pelo nome e os retorna no formato json
+
+---
+tags:
+  - users
+parameters:
+  - name: name
+    in: path
+    type: string
+    required: true
+definitions:
+  name: 
+    type: string
+    exemple: "João silva"
+
+produces:
+  - application/json
+
+responses:
+  200:
+    description: Retorna a tupla do usuario
+    exemples:
+      application/json: {'result': { 'name': 'João Silva', 'document': '123456', 'address': 'Rua Holanda n 12', 'created_date': '021-05-13T18:11:32Z'}}
+  400:
+    description: Bad Request
+    exemples:
+      - application/json: {'result':{"error":{"msg": "400 error: Requisição inválida.","errors": ['Campo "name" invalido']}}}
+  403:
+    description: O registro solicitado não existe.
+  500:
+    description: Houve um problema inesperado com o servidor.

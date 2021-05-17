@@ -1,0 +1,50 @@
+Rota utilizada para atualizar um usuario na base de dados
+
+---
+tags:
+  - users
+parameters:
+  - name: name
+    in: path
+    type: string
+    required: false
+
+  - name: document
+    in: path
+    type: string
+    required: true
+
+  - name: address
+    in: path
+    type: string
+    required: false
+definitions:
+  name: 
+    type: string
+    exemple: "João silva"
+
+  document:
+    type: string
+    exemple: "123456"
+
+  address:
+    type: string
+    exemple: "Rua x, lote 30 quadra 3"
+
+produces:
+  - application/json
+
+responses:
+  201:
+    description: Registro gravado com sucesso.
+    exemples:
+      - application/json: {'result': "Registro gravado com sucesso."}
+  400:
+    description: Bad Request
+    exemples:
+      - application/json: {'result':{"error":{"msg": "400 error: Requisição inválida.","errors": ['Campo "document" invalido']}}}
+  403:
+    description: O registro solicitado não existe.
+  500:
+    description: Houve um problema inesperado com o servidor.
+    
